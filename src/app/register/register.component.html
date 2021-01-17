@@ -1,0 +1,38 @@
+<div id="login-box">
+    <div class="left">
+        <h1>Sign up</h1>
+
+        <input type="text" name="username" placeholder="Username" />
+        <input type="text" name="email" placeholder="E-mail" />
+        <input type="password" name="password" placeholder="Password" />
+        <input type="password" name="password2" placeholder="Retype password" />
+
+        <input type="submit" name="signup_submit" value="Sign me up" />
+
+    </div>
+    <div class="or">OR</div>
+    <div id="login-box">
+        <div class="left">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <h1>Sign up</h1>
+                <input type="text" placeholder="Username" formControlName="username" />
+                <input type="text" placeholder="Account" formControlName="account" />
+                <input type="text" placeholder="E-mail" formControlName="email" />
+                <input type="password" placeholder="Password" formControlName="password" />
+                <input type="submit" [disabled]="!loginForm.valid" value="Sign me up" />
+            </form>
+        </div>
+
+        <div class="right">
+            <span class="loginwith"><img src="../../assets/logo.png" id="icon" alt="User Icon" height="100"
+                    width="100" /></span>
+            <a href="https://www.facebook.com/">
+                <button class="social-signin facebook">Log in with facebook</button>
+            </a>
+
+            <a href="http://localhost:4200/login">
+                <button class="social-signin dashchat">Log in with Dash Chat</button>>
+            </a>
+        </div>
+        <div class="or">OR</div>
+    </div>

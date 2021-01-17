@@ -1,0 +1,95 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+    <title>Dashboard</title>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+</head>
+<!--Coded With Love By Mutiullah Samim-->
+
+<body>
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-md-4 col-xl-3 chat;" style="padding-right: 0px;" >
+                <div class="card mb-sm-3 mb-md-0 contacts_card">
+                    <div class="card-header">
+                        <div class="input-group">
+                            <!-- <input type="text" placeholder="Search..." name="search" class="form-control search"> -->
+                            <input class="form-control search" type="text" name="search" [(ngModel)]="searchText"
+                                autocomplete="off"
+                                placeholder="&#61442;  Start searching for a hero by id or name or country">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text search_btn">
+                                    <i class="fas fa-search" (click)="onSearch(search)"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body contacts_body">
+                        <table class="table table-striped" *ngIf="contactList?.length > 0">
+                            <tbody>
+                                <tr *ngFor="let user of contactList | filter:searchText">
+                                    <td *ngIf="user.id!=userInfo.id">
+                                        <div class="d-flex bd-highlight">
+                                            <div class="img_cont">
+                                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
+                                                    class="rounded-circle user_img">
+                                                <div *ngIf="user.state != 'active'; then isActive else isNotActive">
+                                                </div>
+                                                <ng-template #isActive>
+                                                    <span class="online_icon"></span>
+                                                </ng-template>
+                                                <ng-template #isNotActive>
+                                                    <span class="online_icon offline"></span>
+                                                </ng-template>
+                                            </div>
+                                            <div class="user_info">
+                                                <a href="javascript: return false;"
+                                                    (click)="onClickUser(user.id)"><span>{{user.username}}</span></a>
+                                                <div *ngIf="user.state!=undefined; then isActive else isNotActive">
+                                                </div>
+                                                <ng-template #isActive>
+                                                    <p>{{user.username}} is active</p>
+                                                </ng-template>
+                                                <ng-template #isNotActive>
+                                                    <p>{{user.username}} left a few mins ago</p>
+                                                </ng-template>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- <tr *ngFor="let group of groups | filter:searchText">
+                                    <td>
+                                        <div class="d-flex bd-highlight">
+                                            <div class="img_cont">
+                                                <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
+                                            </div>
+                                            <div class="user_info">
+                                                <a href="javascript: return false;" (click)="onClick(userID,group.groupID,'g')"><span>{{group.groupName}}</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+            <app-chat-detail [chatHistory]=chatHistory [userId]=userId [receiverId]=receiverId></app-chat-detail>
+            <div style="margin-top:50px"></div>
+        </div>
+    </div>
+
+</body>
